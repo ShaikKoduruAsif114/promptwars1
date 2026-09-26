@@ -16,7 +16,6 @@ const CounterOfferModal = lazy(() => import('./components/CounterOfferModal').th
 const GenAiArchitectureModal = lazy(() => import('./components/GenAiArchitectureModal').then(module => ({ default: module.GenAiArchitectureModal })));
 const SettingsModal = lazy(() => import('./components/SettingsModal').then(module => ({ default: module.SettingsModal })));
 const HowToUseModal = lazy(() => import('./components/HowToUseModal').then(module => ({ default: module.HowToUseModal })));
-import confetti from 'canvas-confetti';
 
 export const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'gap_detector' | 'expectations' | 'compare' | 'chat'>('gap_detector');
