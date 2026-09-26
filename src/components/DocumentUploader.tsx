@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { SAMPLE_CONTRACTS, SampleContract } from '../data/samples';
 import { LegalDomain } from '../types/legal';
-import { Upload, FileText, Sparkles, Check, AlertTriangle, ArrowRight, XCircle } from 'lucide-react';
+import { Upload, FileText, Sparkles, Check, ArrowRight, XCircle } from 'lucide-react';
 
 interface UploaderProps {
   initialDomain: LegalDomain;

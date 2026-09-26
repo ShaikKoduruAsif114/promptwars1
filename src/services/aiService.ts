@@ -1,9 +1,7 @@
 import { 
   ExpectedClause, 
-  LegalDomain, 
   AnalysisResult, 
-  AIProviderConfig,
-  DetectedGapItem 
+  AIProviderConfig 
 } from '../types/legal';
 import { DOMAIN_ARCHETYPES } from '../data/archetypes';
 
@@ -148,8 +146,6 @@ Warm regards,
  */
 export function generateLawyerPrepDossier(analysis: AnalysisResult): string {
   const highRiskGaps = analysis.gaps.filter(g => g.risk === 'high' || g.risk === 'critical');
-  const weakGaps = analysis.gaps.filter(g => g.status === 'weak');
-  const missingGaps = analysis.gaps.filter(g => g.status === 'missing');
 
   const questionsList = analysis.gaps
     .filter(g => g.status === 'missing' || g.status === 'weak')

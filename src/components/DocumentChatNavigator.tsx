@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import { AnalysisResult, ChatMessage } from '../types/legal';
 import { answerContractQuestion } from '../services/aiService';
-import { MessageSquare, Send, Bot, User, Sparkles, Quote, HelpCircle, Loader2 } from 'lucide-react';
+import { Send, Bot, User, Sparkles, Quote, Loader2 } from 'lucide-react';
+
+let messageCounter = 0;
+const getUniqueId = (prefix: string) => {
+  messageCounter += 1;
+  return `${prefix}_${messageCounter}`;
+};
 
 interface ChatNavigatorProps {
   analysis: AnalysisResult;
@@ -12,12 +18,12 @@ export const DocumentChatNavigator: React.FC<ChatNavigatorProps> = ({
   analysis,
   documentText
 }) => {
-  const [messages, setMessages] = useState<ChatMessage[]>([
+  const [messages, setMessages] = useState<ChatMessage[]>(() => [
     {
       id: 'welcome',
       sender: 'assistant',
       content: `Hello! I'm your LexiGap Document Assistant for **${analysis.documentTitle}**.\n\nI can decode complex legalese into plain English, locate hidden risks, tell you what's dangerously missing, and prepare you for negotiations.\n\nTry clicking one of the suggested questions below, or ask anything!`,
-      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      timestamp: 'Initial'
     }
   ]);
   const [inputQuestion, setInputQuestion] = useState('');
@@ -35,7 +41,7 @@ export const DocumentChatNavigator: React.FC<ChatNavigatorProps> = ({
     if (!questionText.trim()) return;
 
     const userMsg: ChatMessage = {
-      id: `user_${Date.now()}`,
+      id: getUniqueId('user'),
       sender: 'user',
       content: questionText,
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
@@ -48,7 +54,7 @@ export const DocumentChatNavigator: React.FC<ChatNavigatorProps> = ({
     try {
       const response = await answerContractQuestion(documentText, questionText, analysis);
       const assistantMsg: ChatMessage = {
-        id: `assistant_${Date.now()}`,
+        id: getUniqueId('assistant'),
         sender: 'assistant',
         content: response.answer,
         citations: response.citations,

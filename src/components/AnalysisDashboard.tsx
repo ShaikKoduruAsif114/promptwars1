@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { AnalysisResult, ClauseStatus, DetectedGapItem } from '../types/legal';
+import { AnalysisResult } from '../types/legal';
 import { 
   ShieldAlert, 
-  ShieldCheck, 
   AlertTriangle, 
   HelpCircle, 
   FileText, 
@@ -10,9 +9,7 @@ import {
   CheckSquare, 
   Square, 
   ArrowLeft,
-  Quote,
-  Sparkles,
-  ExternalLink
+  Quote
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 

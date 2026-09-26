@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { AnalysisResult } from '../types/legal';
 import { generateCounterOfferEmail } from '../services/aiService';
-import { X, Copy, Check, Mail, Sparkles } from 'lucide-react';
+import { X, Copy, Check, Mail } from 'lucide-react';
 
 interface CounterOfferModalProps {
   analysis: AnalysisResult;

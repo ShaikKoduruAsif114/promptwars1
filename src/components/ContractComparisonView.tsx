@@ -2,18 +2,18 @@ import React, { useState } from 'react';
 import { SAMPLE_CONTRACTS } from '../data/samples';
 import { analyzeDocumentGaps, compareContractVersions } from '../services/gapEngine';
 import { LegalDomain } from '../types/legal';
-import { GitCompare, ArrowRight, ShieldCheck, AlertTriangle, CheckCircle, Scale } from 'lucide-react';
+import { GitCompare, AlertTriangle, CheckCircle, Scale } from 'lucide-react';
 
 export const ContractComparisonView: React.FC = () => {
-  const [domain, setDomain] = useState<LegalDomain>('rental');
+  const domain: LegalDomain = 'rental';
   
   const trapLease = SAMPLE_CONTRACTS.find(s => s.id === 'sample_rental_trap')?.content || '';
   const fairLease = SAMPLE_CONTRACTS.find(s => s.id === 'sample_rental_fair')?.content || '';
 
-  const [docAName, setDocAName] = useState('Version A: Initial Landlord Draft');
+  const docAName = 'Version A: Initial Landlord Draft';
   const [docAText, setDocAText] = useState(trapLease);
 
-  const [docBName, setDocBName] = useState('Version B: Proposed Balanced Revision');
+  const docBName = 'Version B: Proposed Balanced Revision';
   const [docBText, setDocBText] = useState(fairLease);
 
   const analysisA = analyzeDocumentGaps(docAText, domain, docAName);

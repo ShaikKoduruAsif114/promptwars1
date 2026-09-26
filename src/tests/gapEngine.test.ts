@@ -7,7 +7,6 @@ describe('LexiGap AI - Gap Detection & Evaluation Engine', () => {
   const trapLease = SAMPLE_CONTRACTS.find(s => s.id === 'sample_rental_trap')!;
   const fairLease = SAMPLE_CONTRACTS.find(s => s.id === 'sample_rental_fair')!;
   const techOffer = SAMPLE_CONTRACTS.find(s => s.id === 'sample_employment_startup')!;
-  const freelanceMsa = SAMPLE_CONTRACTS.find(s => s.id === 'sample_freelance_msa')!;
 
   it('correctly spots vulnerabilities and generates low score on Trap Lease', () => {
     const result = analyzeDocumentGaps(trapLease.content, 'rental', trapLease.title);

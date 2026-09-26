@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { getSavedAIConfig, saveAIConfig } from '../services/aiService';
 import { AIProviderConfig } from '../types/legal';
-import { X, Key, Shield, Check, Sparkles } from 'lucide-react';
+import { X, Key, Shield, Check } from 'lucide-react';
 
 interface SettingsModalProps {
   onClose: () => void;

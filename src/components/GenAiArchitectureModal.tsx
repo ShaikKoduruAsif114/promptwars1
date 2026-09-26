@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Cpu, Layers, GitBranch, Shield, Sparkles, CheckCircle2 } from 'lucide-react';
+import { X, Cpu, Shield } from 'lucide-react';
 
 interface ArchitectureModalProps {
   onClose: () => void;
