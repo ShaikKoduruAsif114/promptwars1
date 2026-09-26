@@ -4,6 +4,7 @@ import {
   AIProviderConfig 
 } from '../types/legal';
 import { DOMAIN_ARCHETYPES } from '../data/archetypes';
+import { sanitizePromptForAI, sanitizePlainText, validateApiKey } from '../utils/security';
 
 const STORAGE_KEY_CONFIG = 'lexigap_ai_config';
 
@@ -11,8 +12,8 @@ export function getSavedAIConfig(): AIProviderConfig {
   try {
     const raw = localStorage.getItem(STORAGE_KEY_CONFIG);
     if (raw) return JSON.parse(raw);
-  } catch (e) {
-    console.error('Failed to parse AI config from localStorage', e);
+  } catch {
+    // Fail closed with default built-in provider
   }
   return { provider: 'built_in' };
 }
@@ -20,8 +21,8 @@ export function getSavedAIConfig(): AIProviderConfig {
 export function saveAIConfig(config: AIProviderConfig): void {
   try {
     localStorage.setItem(STORAGE_KEY_CONFIG, JSON.stringify(config));
-  } catch (e) {
-    console.error('Failed to save AI config to localStorage', e);
+  } catch {
+    // Graceful silent fallback
   }
 }
 
@@ -34,12 +35,14 @@ export async function generateExpectationsForCustomSituation(
   jurisdiction = 'General'
 ): Promise<ExpectedClause[]> {
   const config = getSavedAIConfig();
+  const safeSituation = sanitizePromptForAI(situationText, 500);
+  const safeJurisdiction = sanitizePlainText(jurisdiction, 100);
 
-  // If live Gemini API key is provided, we can call Gemini Flash
-  if (config.provider === 'gemini' && config.apiKey) {
+  // If live Gemini API key is provided and valid, call Gemini Flash with timeout
+  if (config.provider === 'gemini' && config.apiKey && validateApiKey(config.apiKey, 'gemini')) {
     try {
       const prompt = `You are an expert legal strategist and contract analyst.
-A user is entering into a legal situation: "${situationText}" in jurisdiction "${jurisdiction}".
+A user is entering into a legal situation: "${safeSituation}" in jurisdiction "${safeJurisdiction}".
 Your task is to generate a comprehensive "Expectation Checklist" of 5-7 essential clauses a fair agreement of this type MUST contain to protect the user from exploitation.
 For each clause, provide:
 1. name: Clause title
@@ -53,14 +56,19 @@ For each clause, provide:
 
 Respond ONLY with valid JSON array of objects conforming to this schema. No markdown formatting, just the raw JSON.`;
 
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 15000);
+
       const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${encodeURIComponent(config.apiKey)}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        signal: controller.signal,
         body: JSON.stringify({
           contents: [{ parts: [{ text: prompt }] }],
           generationConfig: { responseMimeType: 'application/json' }
         })
       });
+      clearTimeout(timeoutId);
 
       if (response.ok) {
         const data = await response.json();
@@ -220,20 +228,22 @@ export async function answerContractQuestion(
   analysis: AnalysisResult
 ): Promise<{ answer: string; citations: string[] }> {
   const config = getSavedAIConfig();
+  const safeQuestion = sanitizePromptForAI(question, 500);
+  const safeDocExcerpt = sanitizePlainText(documentText, 10000);
 
-  // If live Gemini is configured, use live LLM
-  if (config.provider === 'gemini' && config.apiKey) {
+  // If live Gemini is configured and valid, use live LLM with timeout
+  if (config.provider === 'gemini' && config.apiKey && validateApiKey(config.apiKey, 'gemini')) {
     try {
       const prompt = `You are LexiGap AI, an objective legal information assistant helping a consumer navigate their document.
 Document Text:
-${documentText.slice(0, 10000)}
+${safeDocExcerpt}
 
 Current Analysis Summary:
 Protection Score: ${analysis.protectionScore}/100.
 Missing Clauses: ${analysis.gaps.filter(g => g.status === 'missing').map(g => g.clauseName).join(', ')}.
 Weak Clauses: ${analysis.gaps.filter(g => g.status === 'weak').map(g => g.clauseName).join(', ')}.
 
-User Question: "${question}"
+User Question: "${safeQuestion}"
 
 Provide a clear, helpful, plain-English answer that:
 1. Explains what the document actually says (or what it dangerously omits regarding this topic).
@@ -241,11 +251,16 @@ Provide a clear, helpful, plain-English answer that:
 3. Gives the user clear, actionable next steps or questions to ask.
 4. Includes a short reminder that this is legal information, not formal attorney advice.`;
 
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 15000);
+
       const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${encodeURIComponent(config.apiKey)}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        signal: controller.signal,
         body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
       });
+      clearTimeout(timeoutId);
 
       if (response.ok) {
         const data = await response.json();
@@ -254,8 +269,8 @@ Provide a clear, helpful, plain-English answer that:
           return { answer: text, citations: [] };
         }
       }
-    } catch (e) {
-      console.warn('Live Gemini Q&A failed, falling back to smart contextual response', e);
+    } catch {
+      // Graceful fallback to built-in semantic engine
     }
   }
 

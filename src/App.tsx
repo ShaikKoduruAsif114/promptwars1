@@ -10,6 +10,7 @@ import { LawyerDossierModal } from './components/LawyerDossierModal';
 import { CounterOfferModal } from './components/CounterOfferModal';
 import { GenAiArchitectureModal } from './components/GenAiArchitectureModal';
 import { SettingsModal } from './components/SettingsModal';
+import { HowToUseModal } from './components/HowToUseModal';
 import { analyzeDocumentGaps, validateLegalDocument } from './services/gapEngine';
 import { AnalysisResult, LegalDomain } from './types/legal';
 import { SAMPLE_CONTRACTS } from './data/samples';
@@ -29,6 +30,7 @@ export const App: React.FC = () => {
   const [validationError, setValidationError] = useState<string | null>(null);
 
   // Modal triggers
+  const [showHowToUse, setShowHowToUse] = useState(false);
   const [showArchitecture, setShowArchitecture] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [showLawyerDossier, setShowLawyerDossier] = useState(false);
@@ -71,18 +73,29 @@ export const App: React.FC = () => {
 
   return (
     <div className="app-container">
+      {/* Skip to Main Content Link for Screen Readers & Keyboard Accessibility */}
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
+
       <Header
         activeTab={activeTab}
         onSelectTab={setActiveTab}
+        onOpenHowToUse={() => setShowHowToUse(true)}
         onOpenArchitecture={() => setShowArchitecture(true)}
         onOpenSettings={() => setShowSettings(true)}
       />
 
-      <main className="main-content" role="main">
+      <main id="main-content" className="main-content" role="main">
         <LegalDisclaimerBanner />
 
         {activeTab === 'gap_detector' && (
-          <>
+          <section
+            role="tabpanel"
+            id="panel-gap-detector"
+            aria-labelledby="tab-gap-detector"
+            tabIndex={0}
+          >
             {analysis ? (
               <AnalysisDashboard
                 analysis={analysis}
@@ -99,21 +112,40 @@ export const App: React.FC = () => {
                 onClearError={() => setValidationError(null)}
               />
             )}
-          </>
+          </section>
         )}
 
         {activeTab === 'expectations' && (
-          <PreNegotiationExpectations
-            onSelectArchetypeToAnalyze={handleSelectArchetypeToAnalyze}
-          />
+          <section
+            role="tabpanel"
+            id="panel-expectations"
+            aria-labelledby="tab-expectations"
+            tabIndex={0}
+          >
+            <PreNegotiationExpectations
+              onSelectArchetypeToAnalyze={handleSelectArchetypeToAnalyze}
+            />
+          </section>
         )}
 
         {activeTab === 'compare' && (
-          <ContractComparisonView />
+          <section
+            role="tabpanel"
+            id="panel-compare"
+            aria-labelledby="tab-compare"
+            tabIndex={0}
+          >
+            <ContractComparisonView />
+          </section>
         )}
 
         {activeTab === 'chat' && (
-          <>
+          <section
+            role="tabpanel"
+            id="panel-chat"
+            aria-labelledby="tab-chat"
+            tabIndex={0}
+          >
             {analysis ? (
               <DocumentChatNavigator
                 analysis={analysis}
@@ -132,11 +164,18 @@ export const App: React.FC = () => {
                 </button>
               </div>
             )}
-          </>
+          </section>
         )}
       </main>
 
       {/* Modals */}
+      {showHowToUse && (
+        <HowToUseModal
+          onClose={() => setShowHowToUse(false)}
+          onNavigateTab={(t) => setActiveTab(t)}
+        />
+      )}
+
       {showArchitecture && (
         <GenAiArchitectureModal onClose={() => setShowArchitecture(false)} />
       )}

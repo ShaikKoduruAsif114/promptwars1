@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 440" width="100%" height="100%">
+  <defs>
+    <linearGradient id="archBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070B14"/>
+      <stop offset="100%" stop-color="#0E1626"/>
+    </linearGradient>
+    <linearGradient id="layerGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <linearGradient id="layerGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06B6D4"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+    <linearGradient id="layerGrad3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="1100" height="440" rx="16" fill="url(#archBg)" stroke="#1E293B" stroke-width="2"/>
+
+  <!-- Header -->
+  <g transform="translate(40, 26)">
+    <rect width="210" height="26" rx="13" fill="#6366F1" fill-opacity="0.15" stroke="#6366F1" stroke-width="1"/>
+    <text x="105" y="17" fill="#A5B4FC" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" text-anchor="middle">SYSTEM ARCHITECTURE</text>
+  </g>
+  <text x="265" y="45" fill="#F8FAFC" font-family="'Plus Jakarta Sans', sans-serif" font-size="18" font-weight="800">LexiGap AI: Grounded GenAI Architecture &amp; Security Shield</text>
+
+  <!-- Column 1: Client Inputs & Privacy Sandbox -->
+  <g transform="translate(40, 75)">
+    <rect width="280" height="335" rx="12" fill="#0F172A" stroke="#334155" stroke-width="1.5"/>
+    <rect x="0" y="0" width="280" height="36" rx="12" fill="#1E293B"/>
+    <text x="140" y="23" fill="#E2E8F0" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="700" text-anchor="middle">1. Client Input &amp; Security Layer</text>
+
+    <!-- Sub-box 1 -->
+    <rect x="15" y="52" width="250" height="60" rx="8" fill="#162036" stroke="#2563EB" stroke-width="1"/>
+    <text x="28" y="74" fill="#93C5FD" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700">Contract Ingestion</text>
+    <text x="28" y="94" fill="#94A3B8" font-family="'Plus Jakarta Sans', sans-serif" font-size="10">Pasted raw text or selected sample archetype</text>
+
+    <!-- Sub-box 2 -->
+    <rect x="15" y="122" width="250" height="85" rx="8" fill="#162036" stroke="#10B981" stroke-width="1"/>
+    <text x="28" y="144" fill="#6EE7B7" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700">Security &amp; Sanitization Firewall</text>
+    <text x="28" y="162" fill="#94A3B8" font-family="'Plus Jakarta Sans', sans-serif" font-size="10">• DOMPurify XSS Neutralizer</text>
+    <text x="28" y="178" fill="#94A3B8" font-family="'Plus Jakarta Sans', sans-serif" font-size="10">• ReDoS Max-Length Guard (500k)</text>
+    <text x="28" y="194" fill="#94A3B8" font-family="'Plus Jakarta Sans', sans-serif" font-size="10">• Prompt Injection Pattern Scrubber</text>
+
+    <!-- Sub-box 3 -->
+    <rect x="15" y="217" width="250" height="80" rx="8" fill="#162036" stroke="#6366F1" stroke-width="1"/>
+    <text x="28" y="239" fill="#A5B4FC" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700">Plausibility Validator</text>
+    <text x="28" y="258" fill="#94A3B8" font-family="'Plus Jakarta Sans', sans-serif" font-size="10">• Minimum legal token density check</text>
+    <text x="28" y="274" fill="#94A3B8" font-family="'Plus Jakarta Sans', sans-serif" font-size="10">• Non-legal rejection (recipes, lyrics)</text>
+  </g>
+
+  <!-- Connector 1 -> 2 -->
+  <line x1="320" y1="242" x2="360" y2="242" stroke="#6366F1" stroke-width="2" stroke-dasharray="4,4"/>
+  <polygon points="360,242 352,238 352,246" fill="#6366F1"/>
+
+  <!-- Column 2: Grounding & Dual Inference Core -->
+  <g transform="translate(360, 75)">
+    <rect width="360" height="335" rx="12" fill="#0F172A" stroke="#4F46E5" stroke-width="1.5"/>
+    <rect x="0" y="0" width="360" height="36" rx="12" fill="#1E1B4B"/>
+    <text x="180" y="23" fill="#C7D2FE" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="700" text-anchor="middle">2. Grounded Inference &amp; Evaluation Engine</text>
+
+    <!-- RAG Anchor -->
+    <rect x="18" y="52" width="324" height="68" rx="8" fill="#1E293B" stroke="#6366F1" stroke-width="1"/>
+    <text x="32" y="74" fill="#A5B4FC" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700">Domain Legal Archetypes (RAG Anchor)</text>
+    <text x="32" y="92" fill="#CBD5E1" font-family="'Plus Jakarta Sans', sans-serif" font-size="10">Pre-compiled statutory benchmarks across Residential Leases,</text>
+    <text x="32" y="106" fill="#CBD5E1" font-family="'Plus Jakarta Sans', sans-serif" font-size="10">Tech Employment, Freelance MSAs, NDAs, and Consumer SaaS.</text>
+
+    <!-- Dual Inference -->
+    <rect x="18" y="130" width="324" height="110" rx="8" fill="#162036" stroke="#06B6D4" stroke-width="1"/>
+    <text x="32" y="152" fill="#38BDF8" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700">Dual Inference Engine</text>
+    <text x="32" y="172" fill="#94A3B8" font-family="'Plus Jakarta Sans', sans-serif" font-size="10">⚡ <strong fill="#E2E8F0">Primary:</strong> Google Gemini 1.5 Flash (Structured JSON)</text>
+    <text x="44" y="188" fill="#64748B" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.5">Dynamic scenario synthesis &amp; Q&amp;A semantic locator</text>
+    <text x="32" y="208" fill="#94A3B8" font-family="'Plus Jakarta Sans', sans-serif" font-size="10">🛡️ <strong fill="#E2E8F0">Fallback:</strong> Deterministic Local Regex Evaluator</text>
+    <text x="44" y="224" fill="#64748B" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.5">Zero API setup, instant offline processing, zero downtime</text>
+
+    <!-- In-Memory LRU Cache -->
+    <rect x="18" y="250" width="324" height="48" rx="8" fill="#1E293B" stroke="#10B981" stroke-width="1"/>
+    <text x="32" y="271" fill="#6EE7B7" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700">In-Memory LRU Cache (60-Slot Hash Ring)</text>
+    <text x="32" y="286" fill="#94A3B8" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.5">Sub-millisecond instant tab switching &amp; version comparison</text>
+  </g>
+
+  <!-- Connector 2 -> 3 -->
+  <line x1="720" y1="242" x2="760" y2="242" stroke="#6366F1" stroke-width="2" stroke-dasharray="4,4"/>
+  <polygon points="760,242 752,238 752,246" fill="#6366F1"/>
+
+  <!-- Column 3: Actionable Client Outputs -->
+  <g transform="translate(760, 75)">
+    <rect width="300" height="335" rx="12" fill="#0F172A" stroke="#334155" stroke-width="1.5"/>
+    <rect x="0" y="0" width="300" height="36" rx="12" fill="#1E293B"/>
+    <text x="150" y="23" fill="#E2E8F0" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="700" text-anchor="middle">3. Actionable Deliverables</text>
+
+    <!-- Output 1 -->
+    <rect x="15" y="52" width="270" height="60" rx="8" fill="#162036" stroke="#10B981" stroke-width="1"/>
+    <text x="28" y="74" fill="#34D399" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700">0–100 Protection Scoreboard</text>
+    <text x="28" y="92" fill="#94A3B8" font-family="'Plus Jakarta Sans', sans-serif" font-size="10">4-tier categorization: Fair, Weak, Missing, Predatory</text>
+
+    <!-- Output 2 -->
+    <rect x="15" y="122" width="270" height="60" rx="8" fill="#162036" stroke="#06B6D4" stroke-width="1"/>
+    <text x="28" y="144" fill="#22D3EE" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700">Diplomatic Counter-Offer Drafter</text>
+    <text x="28" y="162" fill="#94A3B8" font-family="'Plus Jakarta Sans', sans-serif" font-size="10">Pre-drafted, non-adversarial emails with redlines</text>
+
+    <!-- Output 3 -->
+    <rect x="15" y="192" width="270" height="60" rx="8" fill="#162036" stroke="#A855F7" stroke-width="1"/>
+    <text x="28" y="214" fill="#C084FC" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700">Attorney Consultation Dossier</text>
+    <text x="28" y="232" fill="#94A3B8" font-family="'Plus Jakarta Sans', sans-serif" font-size="10">Exportable legal brief with prioritized questions</text>
+
+    <!-- Output 4 -->
+    <rect x="15" y="262" width="270" height="42" rx="8" fill="#162036" stroke="#F59E0B" stroke-width="1"/>
+    <text x="28" y="284" fill="#FBBF24" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700">Version Diff Battle &amp; Delta Score</text>
+  </g>
+</svg>

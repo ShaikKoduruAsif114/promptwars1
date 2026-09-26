@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { SAMPLE_CONTRACTS } from '../data/samples';
 import { analyzeDocumentGaps, compareContractVersions } from '../services/gapEngine';
 import { LegalDomain } from '../types/legal';
@@ -16,9 +16,9 @@ export const ContractComparisonView: React.FC = () => {
   const docBName = 'Version B: Proposed Balanced Revision';
   const [docBText, setDocBText] = useState(fairLease);
 
-  const analysisA = analyzeDocumentGaps(docAText, domain, docAName);
-  const analysisB = analyzeDocumentGaps(docBText, domain, docBName);
-  const comparison = compareContractVersions(analysisA, analysisB);
+  const analysisA = useMemo(() => analyzeDocumentGaps(docAText, domain, docAName), [docAText, domain, docAName]);
+  const analysisB = useMemo(() => analyzeDocumentGaps(docBText, domain, docBName), [docBText, domain, docBName]);
+  const comparison = useMemo(() => compareContractVersions(analysisA, analysisB), [analysisA, analysisB]);
 
   return (
     <div className="fade-in">

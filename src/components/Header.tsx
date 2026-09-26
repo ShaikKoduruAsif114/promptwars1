@@ -1,10 +1,11 @@
 import React from 'react';
-import { Shield, Sparkles, Scale, GitCompare, MessageSquare, Info, Settings } from 'lucide-react';
+import { Shield, Sparkles, Scale, GitCompare, MessageSquare, Info, Settings, BookOpen } from 'lucide-react';
 
 interface HeaderProps {
   activeTab: 'gap_detector' | 'expectations' | 'compare' | 'chat';
   onSelectTab: (tab: 'gap_detector' | 'expectations' | 'compare' | 'chat') => void;
   onOpenArchitecture: () => void;
+  onOpenHowToUse: () => void;
   onOpenSettings: () => void;
 }
 
@@ -12,6 +13,7 @@ export const Header: React.FC<HeaderProps> = ({
   activeTab,
   onSelectTab,
   onOpenArchitecture,
+  onOpenHowToUse,
   onOpenSettings
 }) => {
   return (
@@ -31,12 +33,14 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
 
-      <nav className="nav-tabs" aria-label="Main Navigation">
+      <nav className="nav-tabs" role="tablist" aria-label="Main Navigation">
         <button
           className={`nav-tab-btn ${activeTab === 'gap_detector' ? 'active' : ''}`}
           onClick={() => onSelectTab('gap_detector')}
           aria-selected={activeTab === 'gap_detector'}
+          aria-controls="panel-gap-detector"
           role="tab"
+          id="tab-gap-detector"
         >
           <Shield size={16} />
           <span>Gap Detector</span>
@@ -46,7 +50,9 @@ export const Header: React.FC<HeaderProps> = ({
           className={`nav-tab-btn ${activeTab === 'expectations' ? 'active' : ''}`}
           onClick={() => onSelectTab('expectations')}
           aria-selected={activeTab === 'expectations'}
+          aria-controls="panel-expectations"
           role="tab"
+          id="tab-expectations"
         >
           <Sparkles size={16} />
           <span>Pre-Contract Expectations</span>
@@ -56,7 +62,9 @@ export const Header: React.FC<HeaderProps> = ({
           className={`nav-tab-btn ${activeTab === 'compare' ? 'active' : ''}`}
           onClick={() => onSelectTab('compare')}
           aria-selected={activeTab === 'compare'}
+          aria-controls="panel-compare"
           role="tab"
+          id="tab-compare"
         >
           <GitCompare size={16} />
           <span>Compare Versions</span>
@@ -66,7 +74,9 @@ export const Header: React.FC<HeaderProps> = ({
           className={`nav-tab-btn ${activeTab === 'chat' ? 'active' : ''}`}
           onClick={() => onSelectTab('chat')}
           aria-selected={activeTab === 'chat'}
+          aria-controls="panel-chat"
           role="tab"
+          id="tab-chat"
         >
           <MessageSquare size={16} />
           <span>Doc Navigator & Q&A</span>
@@ -76,8 +86,19 @@ export const Header: React.FC<HeaderProps> = ({
       <div className="nav-controls">
         <button
           className="btn btn-secondary btn-sm"
+          onClick={onOpenHowToUse}
+          title="How to Use LexiGap AI Guide"
+          aria-label="How to Use Guide"
+        >
+          <BookOpen size={15} />
+          <span>How to Use</span>
+        </button>
+
+        <button
+          className="btn btn-secondary btn-sm"
           onClick={onOpenArchitecture}
           title="View GenAI Architecture & Evaluator Blueprint"
+          aria-label="GenAI Architecture"
         >
           <Info size={15} />
           <span>GenAI Architecture</span>

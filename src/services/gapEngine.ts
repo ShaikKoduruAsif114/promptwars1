@@ -1,4 +1,5 @@
 import { DOMAIN_ARCHETYPES } from '../data/archetypes';
+import { sanitizePlainText } from '../utils/security';
 import { 
   AnalysisResult, 
   DetectedGapItem, 
@@ -8,6 +9,14 @@ import {
   SneakyClause,
   ActionChecklistItem
 } from '../types/legal';
+
+// In-memory analysis cache for maximum efficiency
+const analysisCache = new Map<string, AnalysisResult>();
+const MAX_CACHE_SIZE = 60;
+
+function getCacheKey(text: string, domain: string, title: string): string {
+  return `${domain}::${title}::${text.length}::${text.slice(0, 80)}::${text.slice(-80)}`;
+}
 
 // Safe text normalization
 function normalizeText(text: string): string {
@@ -104,9 +113,16 @@ export function analyzeDocumentGaps(
   domain: LegalDomain,
   documentTitle = 'Uploaded Contract'
 ): AnalysisResult {
+  const sanitizedDoc = sanitizePlainText(documentText);
+  const cacheKey = getCacheKey(sanitizedDoc, domain, documentTitle);
+  const cached = analysisCache.get(cacheKey);
+  if (cached) {
+    return cached;
+  }
+
   const archetype = DOMAIN_ARCHETYPES[domain] || DOMAIN_ARCHETYPES.rental;
-  const norm = normalizeText(documentText);
-  const wordCount = documentText.trim().split(/\s+/).filter(Boolean).length;
+  const norm = normalizeText(sanitizedDoc);
+  const wordCount = sanitizedDoc.trim().split(/\s+/).filter(Boolean).length;
 
   const gaps: DetectedGapItem[] = [];
   const sneakyClauses: SneakyClause[] = [];
@@ -292,7 +308,7 @@ export function analyzeDocumentGaps(
 
   const executiveSummary = `Analysis of "${documentTitle}" (${wordCount} words) reveals an Accessibility & Fairness Score of ${calculatedScore}/100. Out of ${totalClauses} standard expected protective clauses, ${fairCount} are adequately fair, ${weakCount} are present but heavily one-sided, and ${missingCount} essential safeguards are entirely omitted.${sneakyClauses.length > 0 ? ` Additionally, ${sneakyClauses.length} predatory clause(s) were uncovered.` : ''}`;
 
-  return {
+  const finalResult: AnalysisResult = {
     domain,
     documentTitle,
     jurisdiction: archetype.typicalJurisdictions[0],
@@ -309,6 +325,14 @@ export function analyzeDocumentGaps(
     actionChecklist,
     timestamp: new Date().toISOString()
   };
+
+  if (analysisCache.size >= MAX_CACHE_SIZE) {
+    const firstKey = analysisCache.keys().next().value;
+    if (firstKey) analysisCache.delete(firstKey);
+  }
+  analysisCache.set(cacheKey, finalResult);
+
+  return finalResult;
 }
 
 export function compareContractVersions(

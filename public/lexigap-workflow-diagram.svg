@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 360" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070B14"/>
+      <stop offset="100%" stop-color="#0D1424"/>
+    </linearGradient>
+    <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#162036"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1100" height="360" rx="16" fill="url(#bgGrad)" stroke="#1E293B" stroke-width="2"/>
+
+  <!-- Title Badge -->
+  <g transform="translate(40, 28)">
+    <rect width="180" height="28" rx="14" fill="#6366F1" fill-opacity="0.15" stroke="#6366F1" stroke-width="1"/>
+    <text x="90" y="18" fill="#A5B4FC" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" text-anchor="middle">END-TO-END WORKFLOW</text>
+  </g>
+  <text x="235" y="48" fill="#F8FAFC" font-family="'Plus Jakarta Sans', sans-serif" font-size="18" font-weight="800">LexiGap AI: From Pre-Contract Expectations to Signed Resolution</text>
+
+  <!-- Step 1: Pre-Negotiation Expectations -->
+  <g transform="translate(40, 80)">
+    <rect width="190" height="235" rx="12" fill="url(#cardGrad)" stroke="#6366F1" stroke-width="1.5"/>
+    <circle cx="95" cy="40" r="22" fill="#6366F1" fill-opacity="0.2"/>
+    <text x="95" y="47" fill="#818CF8" font-family="'Plus Jakarta Sans', sans-serif" font-size="18" text-anchor="middle">✨</text>
+    <text x="95" y="80" fill="#6366F1" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="800" text-anchor="middle">STEP 01</text>
+    <text x="95" y="102" fill="#F8FAFC" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" font-weight="700" text-anchor="middle">Pre-Contract Matrix</text>
+    <text x="95" y="128" fill="#94A3B8" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" text-anchor="middle">Synthesizes baseline</text>
+    <text x="95" y="144" fill="#94A3B8" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" text-anchor="middle">fair safeguards BEFORE</text>
+    <text x="95" y="160" fill="#94A3B8" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" text-anchor="middle">you receive the draft.</text>
+    <rect x="25" y="185" width="140" height="26" rx="6" fill="#6366F1" fill-opacity="0.12" stroke="#6366F1" stroke-width="0.5"/>
+    <text x="95" y="202" fill="#C7D2FE" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="600" text-anchor="middle">Zero Anchoring Bias</text>
+  </g>
+
+  <!-- Arrow 1 -> 2 -->
+  <path d="M 235 197 L 255 197" stroke="#6366F1" stroke-width="2" stroke-linecap="round" marker-end="url(#arrowhead)"/>
+  <polygon points="255,197 248,193 248,201" fill="#6366F1"/>
+
+  <!-- Step 2: Gap Detection -->
+  <g transform="translate(255, 80)">
+    <rect width="190" height="235" rx="12" fill="url(#cardGrad)" stroke="#06B6D4" stroke-width="1.5"/>
+    <circle cx="95" cy="40" r="22" fill="#06B6D4" fill-opacity="0.2"/>
+    <text x="95" y="47" fill="#22D3EE" font-family="'Plus Jakarta Sans', sans-serif" font-size="18" text-anchor="middle">🛡️</text>
+    <text x="95" y="80" fill="#06B6D4" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="800" text-anchor="middle">STEP 02</text>
+    <text x="95" y="102" fill="#F8FAFC" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" font-weight="700" text-anchor="middle">Gap & Trap Detector</text>
+    <text x="95" y="128" fill="#94A3B8" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" text-anchor="middle">Scans what is MISSING,</text>
+    <text x="95" y="144" fill="#94A3B8" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" text-anchor="middle">weakly drafted, or</text>
+    <text x="95" y="160" fill="#94A3B8" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" text-anchor="middle">predatory in contract.</text>
+    <rect x="25" y="185" width="140" height="26" rx="6" fill="#06B6D4" fill-opacity="0.12" stroke="#06B6D4" stroke-width="0.5"/>
+    <text x="95" y="202" fill="#A5F3FC" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="600" text-anchor="middle">0–100 Protection Score</text>
+  </g>
+
+  <!-- Arrow 2 -> 3 -->
+  <polygon points="470,197 463,193 463,201" fill="#06B6D4"/>
+
+  <!-- Step 3: Version Diff Battle -->
+  <g transform="translate(470, 80)">
+    <rect width="190" height="235" rx="12" fill="url(#cardGrad)" stroke="#F59E0B" stroke-width="1.5"/>
+    <circle cx="95" cy="40" r="22" fill="#F59E0B" fill-opacity="0.2"/>
+    <text x="95" y="47" fill="#FBBF24" font-family="'Plus Jakarta Sans', sans-serif" font-size="18" text-anchor="middle">⚖️</text>
+    <text x="95" y="80" fill="#F59E0B" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="800" text-anchor="middle">STEP 03</text>
+    <text x="95" y="102" fill="#F8FAFC" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" font-weight="700" text-anchor="middle">Version Battle Diff</text>
+    <text x="95" y="128" fill="#94A3B8" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" text-anchor="middle">Side-by-side draft comparison.</text>
+    <text x="95" y="144" fill="#94A3B8" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" text-anchor="middle">Tracks resolved gaps</text>
+    <text x="95" y="160" fill="#94A3B8" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" text-anchor="middle">vs. newly hidden risks.</text>
+    <rect x="25" y="185" width="140" height="26" rx="6" fill="#F59E0B" fill-opacity="0.12" stroke="#F59E0B" stroke-width="0.5"/>
+    <text x="95" y="202" fill="#FDE68A" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="600" text-anchor="middle">Delta Score Metric</text>
+  </g>
+
+  <!-- Arrow 3 -> 4 -->
+  <polygon points="685,197 678,193 678,201" fill="#F59E0B"/>
+
+  <!-- Step 4: Doc Navigator Q&A -->
+  <g transform="translate(685, 80)">
+    <rect width="175" height="235" rx="12" fill="url(#cardGrad)" stroke="#10B981" stroke-width="1.5"/>
+    <circle cx="87" cy="40" r="22" fill="#10B981" fill-opacity="0.2"/>
+    <text x="87" y="47" fill="#34D399" font-family="'Plus Jakarta Sans', sans-serif" font-size="18" text-anchor="middle">💬</text>
+    <text x="87" y="80" fill="#10B981" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="800" text-anchor="middle">STEP 04</text>
+    <text x="87" y="102" fill="#F8FAFC" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" font-weight="700" text-anchor="middle">Plain-English Q&amp;A</text>
+    <text x="87" y="128" fill="#94A3B8" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" text-anchor="middle">Ask questions on</text>
+    <text x="87" y="144" fill="#94A3B8" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" text-anchor="middle">rights &amp; duties. Returns</text>
+    <text x="87" y="160" fill="#94A3B8" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" text-anchor="middle">exact contract quotes.</text>
+    <rect x="20" y="185" width="135" height="26" rx="6" fill="#10B981" fill-opacity="0.12" stroke="#10B981" stroke-width="0.5"/>
+    <text x="87" y="202" fill="#A7F3D0" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="600" text-anchor="middle">Verbatim Citation</text>
+  </g>
+
+  <!-- Arrow 4 -> 5 -->
+  <polygon points="885,197 878,193 878,201" fill="#10B981"/>
+
+  <!-- Step 5: Counter-Offer & Attorney Dossier -->
+  <g transform="translate(885, 80)">
+    <rect width="175" height="235" rx="12" fill="url(#cardGrad)" stroke="#A855F7" stroke-width="1.5"/>
+    <circle cx="87" cy="40" r="22" fill="#A855F7" fill-opacity="0.2"/>
+    <text x="87" y="47" fill="#C084FC" font-family="'Plus Jakarta Sans', sans-serif" font-size="18" text-anchor="middle">📋</text>
+    <text x="87" y="80" fill="#A855F7" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="800" text-anchor="middle">STEP 05</text>
+    <text x="87" y="102" fill="#F8FAFC" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" font-weight="700" text-anchor="middle">Actionable Redlines</text>
+    <text x="87" y="128" fill="#94A3B8" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" text-anchor="middle">Generate diplomatic</text>
+    <text x="87" y="144" fill="#94A3B8" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" text-anchor="middle">counter-offers and</text>
+    <text x="87" y="160" fill="#94A3B8" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" text-anchor="middle">attorney briefing briefs.</text>
+    <rect x="20" y="185" width="135" height="26" rx="6" fill="#A855F7" fill-opacity="0.12" stroke="#A855F7" stroke-width="0.5"/>
+    <text x="87" y="202" fill="#E9D5FF" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="600" text-anchor="middle">1-Click Export Ready</text>
+  </g>
+</svg>

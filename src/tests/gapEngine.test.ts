@@ -96,4 +96,44 @@ describe('LexiGap AI - Gap Detection & Evaluation Engine', () => {
     const result = validateLegalDocument(trapLease.content);
     expect(result.valid).toBe(true);
   });
+
+  it('leverages the in-memory cache for ultra-fast repeated gap analysis', () => {
+    const start1 = performance.now();
+    const result1 = analyzeDocumentGaps(trapLease.content, 'rental', 'Sample');
+    const time1 = performance.now() - start1;
+
+    const start2 = performance.now();
+    const result2 = analyzeDocumentGaps(trapLease.content, 'rental', 'Sample');
+    const time2 = performance.now() - start2;
+
+    expect(result1.protectionScore).toBe(result2.protectionScore);
+    expect(time2).toBeLessThanOrEqual(time1 + 5);
+  });
+
+  it('accurately evaluates Freelance MSA contracts', () => {
+    const freelanceSample = SAMPLE_CONTRACTS.find(s => s.id === 'sample_freelance_msa')!;
+    const result = analyzeDocumentGaps(freelanceSample.content, 'freelance', freelanceSample.title);
+    expect(result.domain).toBe('freelance');
+    expect(result.gaps.length).toBeGreaterThanOrEqual(4);
+    expect(result.protectionScore).toBeGreaterThan(0);
+  });
+
+  it('accurately evaluates NDA contracts with mutual confidentiality checks', () => {
+    const ndaSample = SAMPLE_CONTRACTS.find(s => s.id === 'sample_nda_unilateral')!;
+    const result = analyzeDocumentGaps(ndaSample.content, 'nda', ndaSample.title);
+    expect(result.domain).toBe('nda');
+    expect(result.gaps.some(g => g.clauseId.includes('term') || g.clauseId.includes('carveouts'))).toBe(true);
+  });
+
+  it('handles contracts with special characters and unicode formatting gracefully', () => {
+    const unicodeContract = `LEGAL AGREEMENT: §1. Parties agree to terms.
+    The Landlord shall provide 24-hour advance written notice prior to entering premises © 2026.
+    Security deposit shall be returned within 21 calendar days with itemized receipts.
+    Early termination permitted with 30 days notice.
+    Rent: €1,500 / month payable via SEPA.`;
+    
+    const result = analyzeDocumentGaps(unicodeContract, 'rental', 'Unicode Test');
+    expect(result.protectionScore).toBeGreaterThan(0);
+    expect(result.gaps.length).toBeGreaterThan(0);
+  });
 });

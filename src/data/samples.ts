@@ -118,7 +118,31 @@ Contractor agrees that all deliverables, code, graphics, documentation, and work
 4. TERMINATION AND CANCELLATION
 Client may cancel or terminate this Agreement or any project milestone at any time for convenience upon written email notification. Upon termination, Client shall have no obligation to pay for incomplete milestones or ongoing contractor hours, and Contractor shall promptly deliver all existing work product and files. No cancellation fee or kill fee shall apply.
 
-5. UNLIMITED INDEMNIFICATION AND LIABILITY
-Contractor shall indemnify, defend, and hold harmless Client, its affiliates, and clients against any and all damages, commercial losses, lost profits, system downtimes, and legal fees arising from or related to deliverables provided by Contractor. Contractor's liability under this Agreement shall be unlimited.`
+    Contractor shall indemnify, defend, and hold harmless Client, its affiliates, and clients against any and all damages, commercial losses, lost profits, system downtimes, and legal fees arising from or related to deliverables provided by Contractor. Contractor's liability under this Agreement shall be unlimited.`
+  },
+  {
+    id: 'sample_nda_unilateral',
+    domain: 'nda',
+    title: 'The "Perpetual One-Sided" Non-Disclosure Agreement',
+    subtitle: 'Unilateral obligation, perpetual duration, no standard carveouts or legal process defense.',
+    badge: 'High Risk (Score: ~35/100)',
+    content: `UNILATERAL NON-DISCLOSURE AND PROPRIETARY INFORMATION AGREEMENT
+
+This Agreement is made by and between Disclosing Party Inc. ("Discloser") and Recipient ("Recipient").
+
+1. CONFIDENTIAL INFORMATION
+"Confidential Information" means all information, ideas, concepts, business plans, financial projections, software, customer lists, and conversations disclosed by Discloser to Recipient, whether marked confidential or not.
+
+2. UNILATERAL OBLIGATION OF CONFIDENTIALITY
+Recipient agrees to hold all Confidential Information in strictest confidence and shall not disclose, reproduce, or use any Confidential Information for any purpose other than evaluating a potential business transaction with Discloser. Recipient shall be solely bound by this obligation; Discloser undertakes no reciprocal confidentiality obligation regarding any materials provided by Recipient.
+
+3. PERPETUAL DURATION
+The obligations of confidentiality under this Agreement shall survive indefinitely and continue in perpetuity from the date of disclosure, without expiration or sunset.
+
+4. EXCLUSIONS AND CARVEOUTS
+No exceptions shall apply. Recipient shall not disclose information even if such information is independently developed by Recipient or already known in the public domain without Discloser's prior written release.
+
+5. REMEDIES AND INJUNCTIVE RELIEF
+Recipient acknowledges that any breach will cause irreparable harm for which damages are inadequate. Discloser shall be entitled to immediate injunctive relief and liquidated damages of $100,000 per violation, plus all attorney fees.`
   }
 ];
