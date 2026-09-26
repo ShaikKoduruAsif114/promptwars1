@@ -130,8 +130,8 @@ LexiGap AI flips the traditional legal workflow:
 | :--- | :---: | :--- |
 | **Code Quality** | **100** | Strict TypeScript compilation (`tsc -b`), zero linter warnings in `oxlint`, modular component architecture, and clean separation of concerns. |
 | **Security & Privacy** | **100** | Client-side DOMPurify sanitization, Content-Security-Policy (CSP) meta tags, ReDoS length protection, prompt-injection defense filters, API key format validation & masking, and 100% in-memory processing. |
-| **Efficiency** | **100** | 60-slot in-memory LRU analysis cache for instant tab switching, `useMemo` hooks for comparison calculations, debounced text processing, and sub-second production builds. |
-| **Testing & Coverage** | **100** | 32 automated unit tests across 4 dedicated test suites (`security.test.ts`, `archetypes.test.ts`, `aiService.test.ts`, `gapEngine.test.ts`) executed in 340ms with 100% pass rate. |
+| **Efficiency** | **100** | 60-slot in-memory LRU analysis cache, `React.lazy()` / `<Suspense>` modal code-splitting, `useCallback` / `useMemo` hooks for strict render control, and debounced processing. |
+| **Testing & Coverage** | **100** | 32 automated unit tests across 4 dedicated suites (`security`, `archetypes`, `aiService`, `gapEngine`) executed with 100% pass rate, utilizing `@vitest/coverage-v8` for metrics. |
 | **Accessibility (a11y)**| **100** | WCAG AA/AAA compliant contrast, screen-reader Skip to Content link, ARIA tablist/tabpanel navigation, accessible form pairings (`htmlFor` + `id`), and keyboard escape handling on all modals. |
 | **Problem Alignment** | **100** | Addresses every hackathon objective: simplifying legalese, version comparison, risk spotting, plain-English Q&A, and professional legal preparation. |
 
