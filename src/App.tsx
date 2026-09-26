@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, Suspense, lazy } from 'react';
 import { Header } from './components/Header';
 import { LegalDisclaimerBanner } from './components/LegalDisclaimerBanner';
 import { DocumentUploader } from './components/DocumentUploader';
@@ -6,14 +6,16 @@ import { AnalysisDashboard } from './components/AnalysisDashboard';
 import { PreNegotiationExpectations } from './components/PreNegotiationExpectations';
 import { ContractComparisonView } from './components/ContractComparisonView';
 import { DocumentChatNavigator } from './components/DocumentChatNavigator';
-import { LawyerDossierModal } from './components/LawyerDossierModal';
-import { CounterOfferModal } from './components/CounterOfferModal';
-import { GenAiArchitectureModal } from './components/GenAiArchitectureModal';
-import { SettingsModal } from './components/SettingsModal';
-import { HowToUseModal } from './components/HowToUseModal';
 import { analyzeDocumentGaps, validateLegalDocument } from './services/gapEngine';
 import { AnalysisResult, LegalDomain } from './types/legal';
 import { SAMPLE_CONTRACTS } from './data/samples';
+import confetti from 'canvas-confetti';
+
+const LawyerDossierModal = lazy(() => import('./components/LawyerDossierModal').then(module => ({ default: module.LawyerDossierModal })));
+const CounterOfferModal = lazy(() => import('./components/CounterOfferModal').then(module => ({ default: module.CounterOfferModal })));
+const GenAiArchitectureModal = lazy(() => import('./components/GenAiArchitectureModal').then(module => ({ default: module.GenAiArchitectureModal })));
+const SettingsModal = lazy(() => import('./components/SettingsModal').then(module => ({ default: module.SettingsModal })));
+const HowToUseModal = lazy(() => import('./components/HowToUseModal').then(module => ({ default: module.HowToUseModal })));
 import confetti from 'canvas-confetti';
 
 export const App: React.FC = () => {
@@ -36,7 +38,7 @@ export const App: React.FC = () => {
   const [showLawyerDossier, setShowLawyerDossier] = useState(false);
   const [showCounterOffer, setShowCounterOffer] = useState(false);
 
-  const handleRunAnalysis = (text: string, domain: LegalDomain, title: string) => {
+  const handleRunAnalysis = useCallback((text: string, domain: LegalDomain, title: string) => {
     setValidationError(null);
 
     // Validate that input is actually a legal document
@@ -60,16 +62,16 @@ export const App: React.FC = () => {
         confetti({ particleCount: 50, spread: 60, origin: { y: 0.6 } });
       }
     }, 450);
-  };
+  }, []);
 
-  const handleSelectArchetypeToAnalyze = (domain: LegalDomain) => {
+  const handleSelectArchetypeToAnalyze = useCallback((domain: LegalDomain) => {
     setCurrentDomain(domain);
     const matchingSample = SAMPLE_CONTRACTS.find(s => s.domain === domain) || defaultSample;
     setDocumentText(matchingSample.content);
     const result = analyzeDocumentGaps(matchingSample.content, domain, matchingSample.title);
     setAnalysis(result);
     setActiveTab('gap_detector');
-  };
+  }, [defaultSample]);
 
   return (
     <div className="app-container">
@@ -169,34 +171,36 @@ export const App: React.FC = () => {
       </main>
 
       {/* Modals */}
-      {showHowToUse && (
-        <HowToUseModal
-          onClose={() => setShowHowToUse(false)}
-          onNavigateTab={(t) => setActiveTab(t)}
-        />
-      )}
+      <Suspense fallback={null}>
+        {showHowToUse && (
+          <HowToUseModal
+            onClose={() => setShowHowToUse(false)}
+            onNavigateTab={(t) => setActiveTab(t)}
+          />
+        )}
 
-      {showArchitecture && (
-        <GenAiArchitectureModal onClose={() => setShowArchitecture(false)} />
-      )}
+        {showArchitecture && (
+          <GenAiArchitectureModal onClose={() => setShowArchitecture(false)} />
+        )}
 
-      {showSettings && (
-        <SettingsModal onClose={() => setShowSettings(false)} />
-      )}
+        {showSettings && (
+          <SettingsModal onClose={() => setShowSettings(false)} />
+        )}
 
-      {showLawyerDossier && analysis && (
-        <LawyerDossierModal
-          analysis={analysis}
-          onClose={() => setShowLawyerDossier(false)}
-        />
-      )}
+        {showLawyerDossier && analysis && (
+          <LawyerDossierModal
+            analysis={analysis}
+            onClose={() => setShowLawyerDossier(false)}
+          />
+        )}
 
-      {showCounterOffer && analysis && (
-        <CounterOfferModal
-          analysis={analysis}
-          onClose={() => setShowCounterOffer(false)}
-        />
-      )}
+        {showCounterOffer && analysis && (
+          <CounterOfferModal
+            analysis={analysis}
+            onClose={() => setShowCounterOffer(false)}
+          />
+        )}
+      </Suspense>
 
       <footer className="app-footer" role="contentinfo">
         <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
